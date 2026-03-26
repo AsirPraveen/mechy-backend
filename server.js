@@ -12,6 +12,9 @@ const errorHandler = require('./middleware/errorHandler');
 // Route imports
 const authRoutes = require('./routes/auth.routes');
 const workshopRoutes = require('./routes/workshop.routes');
+const partsRoutes = require('./routes/parts.routes');
+const stockLedgerRoutes = require('./routes/stockLedger.routes');
+const jobCardsRoutes = require('./routes/jobCards.routes');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -27,7 +30,7 @@ app.use(cors({
 // ─── Rate Limiting ─────────────────────────────────────
 const authLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
-  max: 10,
+  max: 100, // 100 req/min in dev, reduce to 10 in production
   message: { message: 'Too many requests. Please try again later.' },
 });
 
@@ -51,6 +54,9 @@ app.get('/api/health', (req, res) => {
 // ─── Routes ────────────────────────────────────────────
 app.use('/api/auth', authLimiter, authRoutes);
 app.use('/api/workshop', workshopRoutes);
+app.use('/api/parts', partsRoutes);
+app.use('/api/stock-ledger', stockLedgerRoutes);
+app.use('/api/job-cards', jobCardsRoutes);
 
 // ─── 404 Handler ───────────────────────────────────────
 app.use((req, res) => {

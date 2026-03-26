@@ -48,8 +48,8 @@ Mechy is a SaaS platform that gives automobile mechanics a **digital workshop** 
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/mechy-api.git
-cd mechy-api
+git clone https://github.com/<your-username>/mechy-backend.git
+cd mechy-backend
 
 # Install dependencies
 npm install
